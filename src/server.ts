@@ -9,7 +9,7 @@ app.use(express.json());
 
 AppDataSource.initialize()
   .then(() => {
-    console.log("✅ Database connected!");
+    console.log("Database connected!");
 
     app.use("/api/products", productRoutes);
     app.use("/api/emi", emiRoutes);

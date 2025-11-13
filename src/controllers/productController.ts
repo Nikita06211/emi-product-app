@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { ILike } from "typeorm";
 import { productRepository } from "../repositories/productRepository";
 
 export const getAllProducts = async (req: Request, res: Response) => {
@@ -42,3 +43,36 @@ export const getProductsByCategory = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Error fetching category products", error });
   }
 };
+
+export const getPaginatedProducts = async (req: Request, res: Response) => {
+    try {
+      const page = parseInt(req.query.page as string) || 1;
+      const limit = parseInt(req.query.limit as string) || 10;
+      const search = (req.query.search as string) || "";
+      const sortBy = (req.query.sortBy as string) || "id"; 
+      const sortOrder =
+        (req.query.sortOrder as string)?.toUpperCase() === "DESC" ? "DESC" : "ASC";
+  
+      const skip = (page - 1) * limit;
+  
+      const [products, total] = await productRepository.findAndCount({
+        where: search ? { name: ILike(`%${search}%`) } : {},
+        relations: ["emiPlans"],
+        take: limit,
+        skip,
+        order: { [sortBy]: sortOrder },
+      });
+  
+      res.json({
+        page,
+        limit,
+        total,
+        totalPages: Math.ceil(total / limit),
+        sortBy,
+        sortOrder,
+        data: products,
+      });
+    } catch (error) {
+      res.status(500).json({ message: "Error fetching products", error });
+    }
+  };
