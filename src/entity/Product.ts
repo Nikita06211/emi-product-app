@@ -21,6 +21,9 @@ export class Product {
   @Column()
   imageUrl!: string;
 
+  @Column()
+  category!: string; 
+
   @OneToMany(() => EMIPlan, (plan) => plan.product)
   emiPlans!: EMIPlan[];
 }
