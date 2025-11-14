@@ -30,7 +30,7 @@ const seedDatabase = async () => {
         product.name = item.title;
         product.mrp = item.price + 2000;
         product.price = item.price;
-        product.imageUrl = item.thumbnail;
+        product.images = item.images && item.images.length ? item.images : [item.thumbnail];
         product.category = category;
 
         const savedProduct = await productRepo.save(product);
