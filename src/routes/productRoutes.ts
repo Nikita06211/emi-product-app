@@ -10,8 +10,8 @@ import {
 const router = Router();
 
 router.get("/", getAllProducts);
-router.get("/:id", getProductById);
 router.get("/paginated", getPaginatedProducts);
 router.get("/category/:category", getProductsByCategory);
+router.get("/:id", getProductById);
 
 export default router;
