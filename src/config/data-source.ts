@@ -3,6 +3,7 @@ import { DataSource } from 'typeorm';
 import dotenv from 'dotenv';
 import { Product } from '../entity/Product';
 import { EMIPlan } from '../entity/EMIPlan';
+import { Variant } from '../entity/Variant';
 
 dotenv.config();
 
@@ -11,5 +12,5 @@ export const AppDataSource = new DataSource({
   url: process.env.DATABASE_URL,
   synchronize: true,
   logging: false,
-  entities: [Product, EMIPlan],
+  entities: [Product, EMIPlan, Variant],
 });
