@@ -1,12 +1,5 @@
 # EMI Product App
 
-This repository contains a small Node.js + TypeScript service that stores products, their variants, and EMI plans using TypeORM and PostgreSQL.
-
-**Quick scripts**
-- Start dev server: `npm run dev`
-
-# EMI Product App
-
 This project is a minimal Node.js + TypeScript service that stores a product catalog (products, variants, images) and EMI plans using TypeORM and PostgreSQL.
 
 Below is a concise reference you can follow to get the app running and to understand the API, tech stack, and DB schema.
